@@ -1,0 +1,23 @@
+{
+	"name": "EditcountAdditions",
+	"version": "0.1",
+	"author": [
+		"Jack Phoenix"
+	],
+	"license-name": "CC-0",
+	"url": "https://www.mediawiki.org/wiki/Extension:EditcountAdditions",
+	"descriptionmsg": "editcountadditions-desc",
+	"type": "other",
+	"AutoloadClasses": {
+		"EditcountAdditions": "EditcountAdditions.class.php"
+	},
+	"Hooks": {
+		"GetPreferences": [
+			"EditcountAdditions::onGetPreferences"
+		],
+		"PageContentSaveComplete": [
+			"EditcountAdditions::onPageContentSaveComplete"
+		]
+	},
+	"manifest_version": 1
+}
