@@ -8,6 +8,11 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:EditcountAdditions",
 	"descriptionmsg": "editcountadditions-desc",
 	"type": "other",
+	"MessagesDirs": {
+		"EditcountAdditions": [
+			"i18n"
+		]
+	},
 	"AutoloadClasses": {
 		"EditcountAdditions": "EditcountAdditions.class.php"
 	},

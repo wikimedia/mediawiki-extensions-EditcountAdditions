@@ -1,8 +1,8 @@
 {
-	"@metadata": [
+	"@metadata": {
 		"authors": [
 			"Samantha Nguyen"
 		]
-	],
+	},
 	"editcountadditions-desc": "{{desc|what=extension|name=EditcountAdditions|url=https://www.mediawiki.org/wiki/Extension:EditcountAdditions}}"
 }

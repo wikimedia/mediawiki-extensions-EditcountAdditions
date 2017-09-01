@@ -1,8 +1,8 @@
 {
-	"@metadata": [
+	"@metadata": {
 		"authors": [
 			"Samantha Nguyen"
 		]
-	],
+	},
 	"editcountadditions-desc": "Shows the local editcount on [[Special:Preferences]] for wikis that use the <code>user</code> table as a shared table."
 }
