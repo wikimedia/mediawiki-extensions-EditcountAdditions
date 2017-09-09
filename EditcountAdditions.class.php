@@ -41,7 +41,7 @@ class EditcountAdditions {
 		$editCount = $wgMemc->get( $key );
 
 		if ( $editCount === false ) {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 
 			// Query timing to determine for how long we should cache the data (HT ValhallaSW)
 			$beginTime = microtime( true );
