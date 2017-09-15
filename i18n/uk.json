@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piramidion"
+		]
+	},
+	"editcountadditions-desc": "Показує локальну кількість редагувань на сторінці [[Special:Preferences|Спеціальна:Налаштування]] у тих вікі, які використовують таблицю <code>user</code> як спільну таблицю."
+}

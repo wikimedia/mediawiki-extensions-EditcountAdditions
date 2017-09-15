@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64"
+		]
+	},
+	"editcountadditions-desc": "Zeigt den lokalen Bearbeitungszähler auf [[Special:Preferences]] für Wikis an, die die Tabelle <code>user</code> als geteilte Tabelle verwenden."
+}
