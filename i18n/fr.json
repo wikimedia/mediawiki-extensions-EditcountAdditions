@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"editcountadditions-desc": "Affiche le compteur de modifications local sur [[Special:Preferences]] pour les wikis qui utilisent la table <code>user</code> comme table partagée."
+}
