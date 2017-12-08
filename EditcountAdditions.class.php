@@ -61,7 +61,7 @@ class EditcountAdditions {
 
 	// Bump the memcache key by one after a page has successfully been saved, as per legoktm
 	public static function onPageContentSaveComplete(
-		$article, $user, $content, $summary, $isMinor, $isWatch,
+		WikiPage $wikiPage, $user, $content, $summary, $isMinor, $isWatch,
 		$section, $flags, $revision, $status, $baseRevId ) {
 		global $wgMemc;
 		// No need to run this code for anons since anons don't have preferences
