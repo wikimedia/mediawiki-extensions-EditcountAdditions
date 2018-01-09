@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido"
+		]
+	},
+	"editcountadditions-desc": "Muestra el recuento de ediciones local en [[Special:Preferences|Especial:Preferencias]] en aquellos wikis que utilicen la tabla <code>user</code> en modo compartido."
+}
