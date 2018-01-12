@@ -37,7 +37,7 @@ class EditcountAdditions {
 		global $wgMemc;
 
 		$uid = $user->getId();
-		$key = wfMemcKey( 'editcount', 'accurate', $uid );
+		$key = $wgMemc->makeKey( 'editcount', 'accurate', $uid );
 		$editCount = $wgMemc->get( $key );
 
 		if ( $editCount === false ) {
@@ -67,7 +67,7 @@ class EditcountAdditions {
 		// No need to run this code for anons since anons don't have preferences
 		// nor does Special:Editcount work for them
 		if ( $user && $user->isLoggedIn() ) {
-			$key = wfMemcKey( 'editcount', 'accurate', $user->getId() );
+			$key = $wgMemc->makeKey( 'editcount', 'accurate', $user->getId() );
 			$wgMemc->incr( $key );
 		}
 		return true;
