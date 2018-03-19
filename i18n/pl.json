@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Railfail536"
+		]
+	},
+	"editcountadditions-desc": "Wyświetla lokalny licznik edycji na [[Special:Preferences]] dla wiki korzystających z tabeli <code>user</code> jako tabeli współdzielonej."
+}
