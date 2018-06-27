@@ -16,13 +16,11 @@ class EditcountAdditions {
 	 *
 	 * @param User $user
 	 * @param array &$defaultPreferences
-	 * @return bool true
 	 */
 	public static function onGetPreferences( $user, &$defaultPreferences ) {
 		global $wgLang;
 		// Overwrite core edit count
 		$defaultPreferences['editcount']['default'] = $wgLang->formatNum( self::getRealEditcount( $user ) );
-		return true;
 	}
 
 	/**
@@ -47,7 +45,7 @@ class EditcountAdditions {
 			$beginTime = microtime( true );
 			$editCount = $dbr->selectField(
 				'revision', 'COUNT(*)',
-				array( 'rev_user' => $uid ),
+				[ 'rev_user' => $uid ],
 				__METHOD__
 			);
 			$endTime = microtime( true ) - $beginTime;
@@ -70,7 +68,6 @@ class EditcountAdditions {
 			$key = $wgMemc->makeKey( 'editcount', 'accurate', $user->getId() );
 			$wgMemc->incr( $key );
 		}
-		return true;
 	}
 
 }

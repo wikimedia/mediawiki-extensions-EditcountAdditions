@@ -1,6 +1,6 @@
 {
 	"name": "EditcountAdditions",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"author": [
 		"Jack Phoenix"
 	],
@@ -17,12 +17,8 @@
 		"EditcountAdditions": "EditcountAdditions.class.php"
 	},
 	"Hooks": {
-		"GetPreferences": [
-			"EditcountAdditions::onGetPreferences"
-		],
-		"PageContentSaveComplete": [
-			"EditcountAdditions::onPageContentSaveComplete"
-		]
+		"GetPreferences": "EditcountAdditions::onGetPreferences",
+		"PageContentSaveComplete": "EditcountAdditions::onPageContentSaveComplete"
 	},
 	"manifest_version": 1
 }
