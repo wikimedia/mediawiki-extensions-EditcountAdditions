@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Vitorvicentevalente"
 		]
 	},
-	"editcountadditions-desc": "Mostra a contagem local de edições em [[Special:Preferences|Preferências]] nas wikis que usam a tabela <code>user</code> como tabela partilhada."
+	"editcountadditions-desc": "Mostra a contagem local de edições em [[Special:Preferences|Preferências]] nas wikis que usam a tabela <code>user</code> como tabela partilhada"
 }
