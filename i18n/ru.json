@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Facenapalm"
+			"Facenapalm",
+			"Movses"
 		]
 	},
-	"editcountadditions-desc": "Показывает локальные счётчики правок в [[Special:Preferences]] для вики-проектов, использующих общую таблицу <code>user</code>."
+	"editcountadditions-desc": "Показывает локальные счётчики правок в [[Special:Preferences]] для вики-проектов, использующих общую таблицу <code>user</code>"
 }
