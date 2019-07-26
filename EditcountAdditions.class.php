@@ -4,7 +4,7 @@
  * the user table, user.user_editcount) in Special:Preferences
  *
  * @file
- * @date 6 June 2010 (amended on 4 January 2015 to add caching)
+ * @date 26 July 2019
  * @author Jack Phoenix <jack@shoutwiki.com>
  */
 
@@ -32,7 +32,7 @@ class EditcountAdditions {
 	 * @return int Edit count (d'oh!)
 	 */
 	public static function getRealEditcount( $user ) {
-		global $wgMemc;
+		global $wgActorTableSchemaMigrationStage, $wgMemc;
 
 		$uid = $user->getId();
 		$key = $wgMemc->makeKey( 'editcount', 'accurate', $uid );
@@ -43,11 +43,23 @@ class EditcountAdditions {
 
 			// Query timing to determine for how long we should cache the data (HT ValhallaSW)
 			$beginTime = microtime( true );
-			$editCount = $dbr->selectField(
-				'revision', 'COUNT(*)',
-				[ 'rev_user' => $uid ],
-				__METHOD__
-			);
+
+			if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
+				$editCount = $dbr->selectField(
+					'revision_actor_temp',
+					'COUNT(*)',
+					[ 'revactor_actor' => $user->getActorId() ],
+					__METHOD__
+				);
+			} else {
+				$editCount = $dbr->selectField(
+					'revision',
+					'COUNT(*)',
+					[ 'rev_user' => $uid ],
+					__METHOD__
+				);
+			}
+
 			$endTime = microtime( true ) - $beginTime;
 
 			// $endTime is in seconds, so multiply it by 60 to get minutes
