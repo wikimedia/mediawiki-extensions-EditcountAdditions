@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Show local edit count instead of global (global is stored in
  * the user table, user.user_editcount) in Special:Preferences
@@ -32,53 +35,55 @@ class EditcountAdditions {
 	 * @return int Edit count (d'oh!)
 	 */
 	public static function getRealEditcount( $user ) {
-		global $wgActorTableSchemaMigrationStage, $wgMemc;
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$key = $cache->makeKey( 'editcount', 'accurate', $user->getId() );
 
-		$uid = $user->getId();
-		$key = $wgMemc->makeKey( 'editcount', 'accurate', $uid );
-		$editCount = $wgMemc->get( $key );
+		return $cache->getWithSetCallback(
+			$key,
+			$cache::TTL_HOUR,
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $user ) {
+				global $wgActorTableSchemaMigrationStage;
 
-		if ( $editCount === false ) {
-			$dbr = wfGetDB( DB_REPLICA );
+				$dbr = wfGetDB( DB_REPLICA );
+				$setOpts += Database::getCacheSetOptions( $dbr );
 
-			// Query timing to determine for how long we should cache the data (HT ValhallaSW)
-			$beginTime = microtime( true );
+				// Query timing to determine for how long we should cache the data (HT ValhallaSW)
+				$beginTime = microtime( true );
+				if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
+					$editCount = $dbr->selectField(
+						'revision_actor_temp',
+						'COUNT(*)',
+						[ 'revactor_actor' => $user->getActorId() ],
+						__METHOD__
+					);
+				} else {
+					$editCount = $dbr->selectField(
+						'revision',
+						'COUNT(*)',
+						[ 'rev_user' => $user->getId() ],
+						__METHOD__
+					);
+				}
+				$endTime = microtime( true );
 
-			if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
-				$editCount = $dbr->selectField(
-					'revision_actor_temp',
-					'COUNT(*)',
-					[ 'revactor_actor' => $user->getActorId() ],
-					__METHOD__
-				);
-			} else {
-				$editCount = $dbr->selectField(
-					'revision',
-					'COUNT(*)',
-					[ 'rev_user' => $uid ],
-					__METHOD__
-				);
-			}
+				$ttl = min( $ttl, 60 * (int)max( $endTime - $beginTime, 1 ) );
 
-			$endTime = microtime( true ) - $beginTime;
-
-			// $endTime is in seconds, so multiply it by 60 to get minutes
-			$wgMemc->set( $key, $editCount, 60 * ( $endTime * 60 ) );
-		}
-
-		return $editCount;
+				return $editCount;
+			},
+			[ 'checkKeys' => [ $key ], 'lockTSE' => 30 ]
+		);
 	}
 
 	// Bump the memcache key by one after a page has successfully been saved, as per legoktm
 	public static function onPageContentSaveComplete(
 		WikiPage $wikiPage, $user, $content, $summary, $isMinor, $isWatch,
-		$section, $flags, $revision, $status, $baseRevId ) {
-		global $wgMemc;
+		$section, $flags, $revision, $status, $baseRevId
+	) {
 		// No need to run this code for anons since anons don't have preferences
 		// nor does Special:Editcount work for them
 		if ( $user && $user->isLoggedIn() ) {
-			$key = $wgMemc->makeKey( 'editcount', 'accurate', $user->getId() );
-			$wgMemc->incr( $key );
+			$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+			$cache->touchCheckKey( $cache->makeKey( 'editcount', 'accurate', $user->getId() ) );
 		}
 	}
 
