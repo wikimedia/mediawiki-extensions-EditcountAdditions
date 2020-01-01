@@ -42,28 +42,19 @@ class EditcountAdditions {
 			$key,
 			$cache::TTL_HOUR,
 			function ( $oldValue, &$ttl, array &$setOpts ) use ( $user ) {
-				global $wgActorTableSchemaMigrationStage;
-
 				$dbr = wfGetDB( DB_REPLICA );
 				$setOpts += Database::getCacheSetOptions( $dbr );
 
 				// Query timing to determine for how long we should cache the data (HT ValhallaSW)
 				$beginTime = microtime( true );
-				if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
-					$editCount = $dbr->selectField(
-						'revision_actor_temp',
-						'COUNT(*)',
-						[ 'revactor_actor' => $user->getActorId() ],
-						__METHOD__
-					);
-				} else {
-					$editCount = $dbr->selectField(
-						'revision',
-						'COUNT(*)',
-						[ 'rev_user' => $user->getId() ],
-						__METHOD__
-					);
-				}
+
+				$editCount = $dbr->selectField(
+					'revision_actor_temp',
+					'COUNT(*)',
+					[ 'revactor_actor' => $user->getActorId() ],
+					__METHOD__
+				);
+
 				$endTime = microtime( true );
 
 				$ttl = min( $ttl, 60 * (int)max( $endTime - $beginTime, 1 ) );
