@@ -17,7 +17,7 @@
 		]
 	},
 	"AutoloadClasses": {
-		"EditcountAdditions": "EditcountAdditions.class.php"
+		"EditcountAdditions": "EditcountAdditions.php"
 	},
 	"Hooks": {
 		"GetPreferences": "EditcountAdditions::onGetPreferences",
