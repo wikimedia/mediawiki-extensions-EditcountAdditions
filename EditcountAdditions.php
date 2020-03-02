@@ -23,7 +23,8 @@ class EditcountAdditions {
 	public static function onGetPreferences( $user, &$defaultPreferences ) {
 		global $wgLang;
 		// Overwrite core edit count
-		$defaultPreferences['editcount']['default'] = $wgLang->formatNum( self::getRealEditcount( $user ) );
+		$defaultPreferences['editcount']['default'] =
+			$wgLang->formatNum( self::getRealEditcount( $user ) );
 	}
 
 	/**
@@ -65,7 +66,21 @@ class EditcountAdditions {
 		);
 	}
 
-	// Bump the memcache key by one after a page has successfully been saved, as per legoktm
+	/**
+	 * Bump the memcache key by one after a page has successfully been saved, as per legoktm
+	 *
+	 * @param WikiPage $wikiPage
+	 * @param User $user
+	 * @param Content $content
+	 * @param string $summary
+	 * @param bool $isMinor
+	 * @param null $isWatch
+	 * @param null $section
+	 * @param int $flags
+	 * @param Revision|null $revision
+	 * @param Status $status
+	 * @param int|false $baseRevId
+	 */
 	public static function onPageContentSaveComplete(
 		WikiPage $wikiPage, $user, $content, $summary, $isMinor, $isWatch,
 		$section, $flags, $revision, $status, $baseRevId
