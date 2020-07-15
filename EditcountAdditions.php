@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentity;
 
 /**
  * Show local edit count instead of global (global is stored in
@@ -70,24 +71,12 @@ class EditcountAdditions {
 	 * Bump the memcache key by one after a page has successfully been saved, as per legoktm
 	 *
 	 * @param WikiPage $wikiPage
-	 * @param User $user
-	 * @param Content $content
-	 * @param string $summary
-	 * @param bool $isMinor
-	 * @param null $isWatch
-	 * @param null $section
-	 * @param int $flags
-	 * @param Revision|null $revision
-	 * @param Status $status
-	 * @param int|false $baseRevId
+	 * @param UserIdentity $user
 	 */
-	public static function onPageContentSaveComplete(
-		WikiPage $wikiPage, $user, $content, $summary, $isMinor, $isWatch,
-		$section, $flags, $revision, $status, $baseRevId
-	) {
+	public static function onPageSaveComplete( WikiPage $wikiPage, UserIdentity $user ) {
 		// No need to run this code for anons since anons don't have preferences
 		// nor does Special:Editcount work for them
-		if ( $user && $user->isLoggedIn() ) {
+		if ( $user->isRegistered() ) {
 			$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 			$cache->touchCheckKey( $cache->makeKey( 'editcount', 'accurate', $user->getId() ) );
 		}
