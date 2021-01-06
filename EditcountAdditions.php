@@ -39,11 +39,12 @@ class EditcountAdditions {
 	public static function getRealEditcount( $user ) {
 		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$key = $cache->makeKey( 'editcount', 'accurate', $user->getId() );
+		$fname = __METHOD__;
 
 		return $cache->getWithSetCallback(
 			$key,
 			$cache::TTL_HOUR,
-			function ( $oldValue, &$ttl, array &$setOpts ) use ( $user ) {
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $user, $fname ) {
 				$dbr = wfGetDB( DB_REPLICA );
 				$setOpts += Database::getCacheSetOptions( $dbr );
 
@@ -54,7 +55,7 @@ class EditcountAdditions {
 					'revision_actor_temp',
 					'COUNT(*)',
 					[ 'revactor_actor' => $user->getActorId() ],
-					__METHOD__
+					$fname
 				);
 
 				$endTime = microtime( true );
