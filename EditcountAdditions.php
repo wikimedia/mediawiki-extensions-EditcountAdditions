@@ -44,7 +44,7 @@ class EditcountAdditions {
 		return $cache->getWithSetCallback(
 			$key,
 			$cache::TTL_HOUR,
-			function ( $oldValue, &$ttl, array &$setOpts ) use ( $user, $fname ) {
+			static function ( $oldValue, &$ttl, array &$setOpts ) use ( $user, $fname ) {
 				$dbr = wfGetDB( DB_REPLICA );
 				$setOpts += Database::getCacheSetOptions( $dbr );
 
