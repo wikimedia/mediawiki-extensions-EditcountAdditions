@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"editcountadditions-desc": "Monstra le numero local de modificationes in [[Special:Preferences]] pro wikis que usa le tabella <code>user</code> como tabella condividite."
+}
