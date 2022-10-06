@@ -52,9 +52,9 @@ class EditcountAdditions {
 				$beginTime = microtime( true );
 
 				$editCount = $dbr->selectField(
-					'revision_actor_temp',
+					'revision',
 					'COUNT(*)',
-					[ 'revactor_actor' => $user->getActorId() ],
+					[ 'rev_actor' => $user->getActorId() ],
 					$fname
 				);
 
