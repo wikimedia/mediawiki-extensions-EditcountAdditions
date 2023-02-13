@@ -2,8 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"Rapsar"
 		]
 	},
-	"editcountadditions-desc": "<code>user</code> tablosunu paylaşılan bir tablo olarak kullanan vikiler için [[Special:Preferences|Özel:Tercihler]] sayfasındaki yerel düzenleme sayısını gösterir."
+	"editcountadditions-desc": "<code>user</code> tablosunu paylaşılan bir tablo olarak kullanan vikiler için [[Special:Preferences|Özel:Tercihler]] sayfasındaki yerel değişiklik sayısını gösterir."
 }
