@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"editcountadditions-desc": "Приказује локалан број измена у [[Special:Preferences]] за викије који користе табелу <code>user</code> као дељену табелу"
+}
