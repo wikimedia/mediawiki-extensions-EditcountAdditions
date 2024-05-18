@@ -2,6 +2,7 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserIdentity;
+use Wikimedia\Rdbms\Database;
 
 /**
  * Show local edit count instead of global (global is stored in
