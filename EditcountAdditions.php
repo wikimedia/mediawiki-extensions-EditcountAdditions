@@ -46,7 +46,7 @@ class EditcountAdditions {
 			$key,
 			$cache::TTL_HOUR,
 			static function ( $oldValue, &$ttl, array &$setOpts ) use ( $user, $fname ) {
-				$dbr = wfGetDB( DB_REPLICA );
+				$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 				$setOpts += Database::getCacheSetOptions( $dbr );
 
 				// Query timing to determine for how long we should cache the data (HT ValhallaSW)
