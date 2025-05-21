@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"editcountadditions-desc": "Prikazuje lokalan broj izmena u [[Special:Preferences]] za vikije koji koriste tabelu <code>user</code> kao deljenu tabelu"
+}
