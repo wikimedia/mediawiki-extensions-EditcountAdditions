@@ -5,5 +5,5 @@
 			"Penyuwangi"
 		]
 	},
-	"editcountadditions-desc": "Menampilkan banyak suntingan setempat di [[Special:Preferences]] untuk wiki yang menggunakan tabel <code>user</code> sebagai tabel bersama."
+	"editcountadditions-desc": "Menampilkan jumlah suntingan lokal di [[Special:Preferences]] untuk wiki yang menggunakan tabel <code>user</code> sebagai tabel bersama."
 }
