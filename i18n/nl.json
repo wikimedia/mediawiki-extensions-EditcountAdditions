@@ -2,8 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Mainframe98",
-			"Mar(c)"
+			"Mar(c)",
+			"Siebrand"
 		]
 	},
-	"editcountadditions-desc": "Toont het aantal bewerkingen op [[Special:Preferences]] voor de lokale wiki op wiki's waarbij gebruik wordt gemaakt van de <code>user</code> tabel als gedeelde tabel"
+	"editcountadditions-desc": "Geeft het aantal bewerkingen weer op [[Special:Preferences]] voor de lokale wiki op wiki's waarbij gebruik wordt gemaakt van de <code>user</code> tabel als gedeelde tabel"
 }
