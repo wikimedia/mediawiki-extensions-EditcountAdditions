@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"editcountadditions-desc": "Zobrazuje lokálny počet úprav na [[Special:Preferences]] pre wiki, ktoré používajú tabuľku <code>user</code> ako zdieľanú tabuľku"
+}
